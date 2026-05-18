@@ -4,6 +4,10 @@ Generated: 2026-05-18
 Arranges and creates nodes in a grid
 
 ## Class: GridArranger2D
+@export
+		slot_=
+		var
+			push_error("GridArranger2D:
 **Inherits:** [NodeArranger](git@github.com:ChillCube/2d_node_arranger/blob/main/DOCUMENTATION.md)
 
 
