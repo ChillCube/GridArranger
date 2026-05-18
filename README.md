@@ -30,3 +30,8 @@ push-all-addons
 ```
 
 
+
+## Used By
+1 other ChillCube addon(s) depend on this:
+
+- [ItemFrameGrid2D](https://github.com/ChillCube/ItemFrameGrid2D)
