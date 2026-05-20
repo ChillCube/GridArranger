@@ -2,23 +2,23 @@
 extends NodeArranger
 class_name GridArranger2D
 
-@export var slot_class_name : String = "Node2D":
+@export var slot_class_name : String = "Node2D": ## Class name of the node to instantiate for each grid cell (override in subclass via override_slot_class)
 	set(val):
 		slot_class_name = override_slot_class(val)
 
-@export var grid_length : int:
+@export var grid_length : int: ## Number of columns; also sets NodeArranger.max_horizontal and rebuilds cells
 	set(val):
 		grid_length = val;
 		max_horizontal = grid_length;
 		_createItemFrames()
 
-@export var grid_height : int:
+@export var grid_height : int: ## Number of rows; also sets NodeArranger.max_vertical and rebuilds cells
 	set(val):
 		grid_height = val;
 		max_vertical = grid_height;
 		_createItemFrames()
 
-func _createItemFrames() -> void:
+func _createItemFrames() -> void: ## Syncs child count to grid_length × grid_height, adding or removing slot nodes as needed
 	var target := grid_length * grid_height
 	while get_children().size() > target:
 		get_child(get_children().size() - 1).free()
@@ -41,8 +41,8 @@ func _instantiate_slot(class_str: String) -> Object:
 func child_modifyer(child : Node2D) -> Node2D: ## stub to add your own child modification logic
 	return child
 
-func adding_child(child, id : int) -> void:
+func adding_child(child, id : int) -> void: ## Stub called before each slot child is added; override to initialise cells by index
 	pass
 
-func override_slot_class(val : String) -> String:
+func override_slot_class(val : String) -> String: ## Stub: override to force a different class name regardless of what the inspector sets
 	return val
