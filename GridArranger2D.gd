@@ -23,12 +23,13 @@ func _createItemFrames() -> void: ## Syncs child count to grid_length × grid_he
 	while get_children().size() > target:
 		get_child(get_children().size() - 1).free()
 	while get_children().size() < target:
-		var new_frame = _instantiate_slot(slot_class_name)
+		var new_frame = _instantiate_slot(override_slot_class(slot_class_name))
 		if new_frame == null:
 			push_error("GridArranger2D: could not instantiate class '" + slot_class_name + "'")
 			break
 		adding_child(new_frame, get_children().size())
 		add_child(child_modifyer(new_frame));
+		new_frame = child_modifyer_after_creation(new_frame)
 
 func _instantiate_slot(class_str: String) -> Object:
 	if ClassDB.class_exists(class_str):
@@ -39,6 +40,9 @@ func _instantiate_slot(class_str: String) -> Object:
 	return null
 
 func child_modifyer(child : Node2D) -> Node2D: ## stub to add your own child modification logic
+	return child
+
+func child_modifyer_after_creation(child : Node2D) -> Node2D:
 	return child
 
 func adding_child(child, id : int) -> void: ## Stub called before each slot child is added; override to initialise cells by index
